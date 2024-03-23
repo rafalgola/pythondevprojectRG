@@ -64,7 +64,7 @@ def collect_more_detailed_data_from_online_generator():
 
     with open('detailedpesels.csv', 'a') as file:
         fake = Faker()
-        for _ in range(1):
+        for _ in range(50):
             for i in range(5):
                 date = fake.date_between(start_date=datetime(centuries[i][1][0], centuries[i][1][1],
                                                              centuries[i][1][2]),
