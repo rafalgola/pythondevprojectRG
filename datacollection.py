@@ -7,6 +7,20 @@ from datetime import datetime
 import string_utils
 from faker import Faker
 
+def check_files():
+    try:
+        with open ('pesels.csv','r') as file:
+            print('Found pesels.csv')
+    except FileNotFoundError:
+        with open ('pesels.csv','a') as file:
+            file.write(f'Pesel;Bool\n')
+    try:
+        with open ('detailedpesels.csv','r') as file:
+            print('Found detailedpesels.csv')
+    except FileNotFoundError:
+        with open ('detailedpesels.csv','a') as file:
+            file.write(f'Pesel;BirthDate;Century;Gender;Bool\n')
+    return None
 
 def collect_data_from_online_generator():
     """This function gets a PESEL from online generator and adds it and its shuffled version to a csv file."""
@@ -20,11 +34,12 @@ def collect_data_from_online_generator():
     webdriver.ActionChains(driver).move_to_element(accept).click().perform()
 
     wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[id="generate"]')))
+    webdriver.ActionChains(driver).scroll_by_amount(0, 300).perform()
     generate = driver.find_element(By.CSS_SELECTOR, 'button[id="generate"]')
     resultarea = driver.find_element(By.XPATH, '//textarea[@id="results"]')
     webdriver.ActionChains(driver).move_to_element(generate).perform()
     with open('pesels.csv', 'a') as file:
-        for _ in range(100):
+        for _ in range(1):
             wait.until(EC.element_to_be_clickable(generate))
             webdriver.ActionChains(driver).click(generate).perform()
             time.sleep(1.5)
@@ -64,7 +79,7 @@ def collect_more_detailed_data_from_online_generator():
 
     with open('detailedpesels.csv', 'a') as file:
         fake = Faker()
-        for _ in range(50):
+        for _ in range(1):
             for i in range(5):
                 date = fake.date_between(start_date=datetime(centuries[i][1][0], centuries[i][1][1],
                                                              centuries[i][1][2]),
