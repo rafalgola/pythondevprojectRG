@@ -7,49 +7,18 @@ from datetime import datetime
 import string_utils
 from faker import Faker
 
+
 def check_files():
     try:
-        with open ('pesels.csv','r') as file:
-            print('Found pesels.csv')
-    except FileNotFoundError:
-        with open ('pesels.csv','a') as file:
-            file.write(f'Pesel;Bool\n')
-    try:
-        with open ('detailedpesels.csv','r') as file:
+        with open('detailedpesels.csv', 'r') as file:
             print('Found detailedpesels.csv')
     except FileNotFoundError:
-        with open ('detailedpesels.csv','a') as file:
+        with open('detailedpesels.csv', 'a') as file:
             file.write(f'Pesel;BirthDate;Century;Gender;Bool\n')
     return None
 
-def collect_data_from_online_generator():
-    """This function gets a PESEL from online generator and adds it and its shuffled version to a csv file."""
-    driver = webdriver.Chrome()
-    driver.maximize_window()
-    driver.get("https://testerzy.pl/baza-wiedzy/narzedzia-online/generatory")
-    wait = WebDriverWait(driver, 15, 0.5)
-    wait.until(EC.visibility_of_element_located((By.ID, 'cookieLawModal-accept')))
-    # wait.until(EC.element_to_be_clickable((By.ID, 'cookieLawModal-accept')))
-    accept = driver.find_element(By.ID, 'cookieLawModal-accept')
-    webdriver.ActionChains(driver).move_to_element(accept).click().perform()
 
-    wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[id="generate"]')))
-    webdriver.ActionChains(driver).scroll_by_amount(0, 300).perform()
-    generate = driver.find_element(By.CSS_SELECTOR, 'button[id="generate"]')
-    resultarea = driver.find_element(By.XPATH, '//textarea[@id="results"]')
-    webdriver.ActionChains(driver).move_to_element(generate).perform()
-    with open('pesels.csv', 'a') as file:
-        for _ in range(1):
-            wait.until(EC.element_to_be_clickable(generate))
-            webdriver.ActionChains(driver).click(generate).perform()
-            time.sleep(1.5)
-            resultpesel = resultarea.get_attribute('value')
-            shuffledpesel = string_utils.shuffle(resultpesel)
-            file.write(f'{resultpesel};1\n')
-            file.write(f'{shuffledpesel};0\n')
-            print(f'{resultpesel} and {shuffledpesel} added to pesels.csv.')
-    driver.quit()
-    return None
+
 
 
 def collect_more_detailed_data_from_online_generator():
@@ -93,7 +62,7 @@ def collect_more_detailed_data_from_online_generator():
                 shuffledpesel = string_utils.shuffle(resultpesel)
                 dateinput.clear()
                 file.write(f'{resultpesel};{date.year}{date.month:02}{date.day:02};{centuries[i][0]};0;1\n')
-                file.write(f'{shuffledpesel};{date.year}{date.month:02}{date.day:02}:{centuries[i][0]};0;0\n')
+                file.write(f'{shuffledpesel};{date.year}{date.month:02}{date.day:02};{centuries[i][0]};0;0\n')
                 print(f'{resultpesel} and {shuffledpesel} added to detailedpesels.csv.')
                 webdriver.ActionChains(driver).move_to_element(male).click().perform()
                 dateinput.send_keys(f'{date.day}.{date.month}.{date.year}')
