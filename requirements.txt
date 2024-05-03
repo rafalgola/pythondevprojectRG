@@ -1,0 +1,7 @@
+django==4.2.0
+requests
+psutil
+selenium
+python-string-utils
+faker
+datetime
