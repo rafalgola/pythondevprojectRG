@@ -70,6 +70,6 @@ def collect_detailed_data_from_online_generator():
                 dateinput.clear()
                 file.write(f'{resultpesel};{date.year}{date.month:02}{date.day:02};{centuries[i][0]};1;1\n')
                 file.write(f'{shuffledpesel};{date.year}{date.month:02}{date.day:02};{centuries[i][0]};1;0\n')
-                print(f'{resultpesel} and {shuffledpesel} added to detailedpesels.csv.')
+                print(f'{resultpesel} and {shuffledpesel} added to detailedpesels.csv')
     driver.quit()
     return None
