@@ -18,5 +18,5 @@ def displaystartmessage():
 
 
 def displayendmessage():
-    print("That'a all Folks!")
+    print("That's all Folks!")
     return None
