@@ -45,7 +45,7 @@ def collect_detailed_data_from_online_generator():
 
     with open('detailedpesels.csv', 'a') as file:
         fake = Faker()
-        for _ in range(1):  # Previously used to collect larger amount of data for a fucked-up ML project
+        for _ in range(1):  # This FOR was previously used to collect larger amount of data for a fucked-up ML project
             for i in range(5):
 
                 date = fake.date_between(start_date=datetime(centuries[i][1][0], centuries[i][1][1],
@@ -69,9 +69,6 @@ def collect_detailed_data_from_online_generator():
 
                 writepeseltocsv(gender)
 
-                # file.write(f'{resultpesel};{date.year}{date.month:02}{date.day:02};{centuries[i][0]};0;1\n')
-                # file.write(f'{shuffledpesel};{date.year}{date.month:02}{date.day:02};{centuries[i][0]};0;0\n')
-                # print(f'{resultpesel} and {shuffledpesel} added to detailedpesels.csv')
                 webdriver.ActionChains(driver).move_to_element(male).click().perform()
                 gender = '1'  # added
                 dateinput.send_keys(f'{date.day}.{date.month}.{date.year}')
@@ -81,8 +78,5 @@ def collect_detailed_data_from_online_generator():
                 shuffledpesel = string_utils.shuffle(resultpesel)
                 dateinput.clear()
                 writepeseltocsv(gender)
-                # file.write(f'{resultpesel};{date.year}{date.month:02}{date.day:02};{centuries[i][0]};1;1\n')
-                # file.write(f'{shuffledpesel};{date.year}{date.month:02}{date.day:02};{centuries[i][0]};1;0\n')
-                # print(f'{resultpesel} and {shuffledpesel} added to detailedpesels.csv')
     driver.quit()
     return None

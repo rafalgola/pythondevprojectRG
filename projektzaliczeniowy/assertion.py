@@ -16,7 +16,6 @@ def arrangassert():
     response = requests.get(f'http://127.0.0.1:8000/Pesel?pesel={peseltovalidate}')
 
     json_response = json.loads(response.text)
-    # print(json_response)
     print(f'Final operation - assertion for randomly chosen from .csv file {peseltovalidate} and reply from validator:')
     try:
         assert json_response['result'] == int(row[-2])
