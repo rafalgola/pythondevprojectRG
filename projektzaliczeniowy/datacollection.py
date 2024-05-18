@@ -15,7 +15,6 @@ def check_files():
     except FileNotFoundError:
         with open('detailedpesels.csv', 'a') as file:
             file.write(f'Pesel;BirthDate;Century;Gender;Bool\n')
-    return None
 
 
 def collect_detailed_data_from_online_generator():
@@ -83,4 +82,3 @@ def collect_detailed_data_from_online_generator():
                 dateinput.clear()
                 writepeseltocsv(gender)
     driver.quit()
-    return None

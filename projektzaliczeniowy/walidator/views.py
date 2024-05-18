@@ -1,5 +1,6 @@
-from django.shortcuts import render
+# from django.shortcuts import render
 from django.http import JsonResponse
+from .models import Asserted_Pesels
 
 # Create your views here.
 invalidmonths = {'13', '14', '15', '16', '17', '18', '19', '20',
@@ -9,11 +10,11 @@ invalidmonths = {'13', '14', '15', '16', '17', '18', '19', '20',
                  '93', '94', '94', '96', '97', '98', '99', '00'}
 
 
-def displaymessage(request):
+def display_message(request):
     return JsonResponse({'MESSAGE': 'This is Rafal\'s final project for postgraduate \'Python Developer\' studies.'})
 
 
-def validatepesel(request):
+def validate_pesel(request):
     peseltovalidate = request.GET.get('pesel', None)
     validation_result = True
     if len(peseltovalidate) == 11 and str(peseltovalidate).isnumeric():
@@ -32,3 +33,9 @@ def validatepesel(request):
     else:
         return JsonResponse({'PESEL': peseltovalidate, 'result': False, 'MESSAGE': 'Pesel must be exactly 11 digits '
                                                                                    'long.'}, status=400)
+
+
+def list_asserted_pesels(request):
+    assertions = Asserted_Pesels.objects.all()
+    data = list(assertions.values('stamp', 'pesel', 'assertion_result'))
+    return JsonResponse({'Asserted PESELs': data})

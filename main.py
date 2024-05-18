@@ -23,16 +23,16 @@ def display_start_message():
 
 def prepare_virtual_env():
     print("Creation of virtual environment: ")
-    create_venv = subprocess.Popen("python -m venv virtenv3", shell=True)
+    create_venv = subprocess.Popen("python -m venv virtenv", shell=True)
     create_venv.wait()
-    activate_script = r'.\virtenv3\Scripts\activate'
+    activate_script = r'.\virtenv\Scripts\activate'
     if os.path.exists(activate_script):
         print("[DONE]")
 
 
 def activate_virtual_env_and_perform_logic():
     print("Activation of virtual environment: ")
-    activate_script = r'.\virtenv3\Scripts\activate'
+    activate_script = r'.\virtenv\Scripts\activate'
     subprocess.run(f'{activate_script} && python projektzaliczeniowy/usedjango.py', shell=True,
                    executable='C:\Windows\System32\cmd.exe')
 
@@ -44,9 +44,8 @@ def main():
         activate_virtual_env_and_perform_logic()
     else:
         print("Your choose not to proceed...")
+    input("Press enter to quit...")
 
 
 if __name__ == '__main__':
     main()
-
-input("Press enter to quit...")

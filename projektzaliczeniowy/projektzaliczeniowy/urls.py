@@ -22,7 +22,8 @@ from walidator import views as apiview
 
 
 urlpatterns = [
-    path('', apiview.displaymessage, name='displamessage'),
-    path('Pesel', apiview.validatepesel, name='validatepesel'),
+    path('', apiview.display_message, name='display_message'),
+    path('Pesel', apiview.validate_pesel, name='validate_pesel'),
+    path('Assertions', apiview.list_asserted_pesels, name='list_asserted_pesels'),
     path('admin/', admin.site.urls),
 ]

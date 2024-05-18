@@ -16,6 +16,6 @@ def chromedriver_in_path():
 if os.path.exists(chromedriver_path) or chromedriver_in_path():
     datacollection.check_files()
     datacollection.collect_detailed_data_from_online_generator()
-    assertion.arrangassert()
+    assertion.arrange_assert()
 else:
     print("Download chromedriver.exe in 'projektzaliczeniowy' directory ( or into $PATH ) and then run main.py again.")
