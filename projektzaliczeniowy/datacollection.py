@@ -25,15 +25,19 @@ def collect_detailed_data_from_online_generator():
     driver.maximize_window()
     driver.get("https://generatorliczb.pl/generator-pesel")
     wait = WebDriverWait(driver, 15, 0.5)
-    wait.until(EC.visibility_of_element_located((By.XPATH, '//*[contains(text(), "Zgadzam")]')))
-    wait.until(EC.element_to_be_clickable((By.XPATH, '//*[contains(text(), "Zgadzam")]')))
-    accept = driver.find_element(By.XPATH, '//*[contains(text(),"Zgadzam")]')
-    webdriver.ActionChains(driver).move_to_element(accept).click().perform()
+    # Ze strony zniknęła informacja o cookies wiec nie ma potrzeby akceptacji ( ponizsze 4 linie zakomentowane )
+    # wait.until(EC.visibility_of_element_located((By.XPATH, '//*[contains(text(), "Zgadzam")]')))
+    # wait.until(EC.element_to_be_clickable((By.XPATH, '//*[contains(text(), "Zgadzam")]')))
+    # accept = driver.find_element(By.XPATH, '//*[contains(text(),"Zgadzam")]')
+    # webdriver.ActionChains(driver).move_to_element(accept).click().perform()
+
+    generate = driver.find_element(By.CSS_SELECTOR, 'button[type="button"]')
+    webdriver.ActionChains(driver).move_to_element(generate)
 
     female = driver.find_element(By.CSS_SELECTOR, 'input[id="female"]')
     male = driver.find_element(By.CSS_SELECTOR, 'input[id="male"]')
     dateinput = driver.find_element(By.CSS_SELECTOR, 'input[name="date"]')
-    generate = driver.find_element(By.CSS_SELECTOR, 'button[type="button"]')
+    # generate = driver.find_element(By.CSS_SELECTOR, 'button[type="button"]')
     resultarea = driver.find_element(By.CSS_SELECTOR, 'span[class="result"]')
     centuries = ((19, (1800, 1, 1), (1899, 12, 31)),
                  (20, (1900, 1, 1), (1999, 12, 31)),

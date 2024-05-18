@@ -2,6 +2,9 @@ import subprocess
 import os
 import messages
 
+def main():
+
+
 
 while True:
     cont = messages.displaystartmessage()
@@ -9,9 +12,9 @@ while True:
         break
     print("Creation of virtual environment: ")
     # create_venv = subprocess.Popen("python -m venv testowevirtenv ", stdout=subprocess.PIPE, shell=True)
-    create_venv = subprocess.Popen("python -m venv virtenv", shell=True)
+    create_venv = subprocess.Popen("python -m venv virtenv3", shell=True)
     create_venv.wait()
-    activate_script = r'.\virtenv\Scripts\activate'
+    activate_script = r'.\virtenv3\Scripts\activate'
     if os.path.exists(activate_script):
         print("[DONE]")
     print("Activation of virtual environment: ")

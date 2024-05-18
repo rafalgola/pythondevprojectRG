@@ -1,2 +1,2 @@
 This repository contains project made as part of **Python Developer** postgraduate study on *WSB Merito*.
-Simply just run main.py.
+The project is intented to be run on WINDOWS operating system. Simply just run main.py.
