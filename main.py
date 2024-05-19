@@ -17,7 +17,8 @@ def display_start_message():
 
     print("|", " " * 66, "-" * 11)
     print("| %s |" % "Be warned: it will take some time to complete run of this project".center(66), "Proceed?")
-    cont = input("{prompt}   Y/n? ".format(prompt='-' * 70))
+    # cont = input("{prompt}   Y/n? ".format(prompt='-' * 70))
+    cont = 'Y'
     return cont
 
 
@@ -44,7 +45,7 @@ def main():
         activate_virtual_env_and_perform_logic()
     else:
         print("Your choose not to proceed...")
-    input("Press enter to quit...")
+    # input("Press enter to quit...")
 
 
 if __name__ == '__main__':
