@@ -32,14 +32,16 @@ def arrange_assert():
                                              pesel=peseltovalidate,
                                              assertion_result='False')
         write_to_db.save()
-        pass
+
     else:
-        print("No assertion error  - so project SUCCEEDED :)")
+
         write_to_db = models.Asserted_Pesels(stamp=str(datetime.now())[:16],
                                              pesel=peseltovalidate,
                                              assertion_result='True')
         write_to_db.save()
-        # with open('assertions.log', 'a') as file:
-        #     file.write(f'{datetime.now()} - Test for {peseltovalidate} PASSED.\n')
+        response = requests.get('http://127.0.0.1:8000/Assertions')
+        json_response = json.loads(response.text)
+        print("No assertion error: 'True' below means that project SUCCEEDED.")
+        print(json_response["Asserted PESELs"][len(json_response["Asserted PESELs"]) - 1])
     finally:
         print("Will now start quitting....")

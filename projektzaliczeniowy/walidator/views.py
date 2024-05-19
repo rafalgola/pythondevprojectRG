@@ -27,6 +27,8 @@ def validate_pesel(request):
                                  (int(splittedpesel[4]) * 1 % 10) + (int(splittedpesel[5]) * 3 % 10) +
                                  (int(splittedpesel[6]) * 7 % 10) + (int(splittedpesel[7]) * 9 % 10) +
                                  (int(splittedpesel[8]) * 1 % 10) + (int(splittedpesel[9]) * 3 % 10)) % 10
+            if controldigit == 10:
+                controldigit = 0
             if controldigit != int(splittedpesel[10]):
                 validation_result = False
         return JsonResponse({'PESEL': peseltovalidate, 'result': validation_result})
