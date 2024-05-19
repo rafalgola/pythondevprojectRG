@@ -2,7 +2,7 @@ name: Projektzaliczeniowy CI|
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main" , "dev"]
   pull_request:
     branches: [ "main" ]
 
@@ -26,6 +26,8 @@ jobs:
         python -m pip install --upgrade pip
     - name: Run Project
       run: |
+        python -m .\manage.py check
+        python -m .\manage.py test
         python .\main.py
     - name: Run Test
       run: |
