@@ -25,10 +25,10 @@ def collect_detailed_data_from_online_generator():
     driver.get("https://generatorliczb.pl/generator-pesel")
     wait = WebDriverWait(driver, 15, 0.5)
     # Ze strony zniknęła informacja o cookies wiec nie ma potrzeby akceptacji ( ponizsze 4 linie zakomentowane )
-    # wait.until(EC.visibility_of_element_located((By.XPATH, '//*[contains(text(), "Zgadzam")]')))
-    # wait.until(EC.element_to_be_clickable((By.XPATH, '//*[contains(text(), "Zgadzam")]')))
-    # accept = driver.find_element(By.XPATH, '//*[contains(text(),"Zgadzam")]')
-    # webdriver.ActionChains(driver).move_to_element(accept).click().perform()
+    wait.until(EC.visibility_of_element_located((By.XPATH, '//*[contains(text(), "Zgadzam")]')))
+    wait.until(EC.element_to_be_clickable((By.XPATH, '//*[contains(text(), "Zgadzam")]')))
+    accept = driver.find_element(By.XPATH, '//*[contains(text(),"Zgadzam")]')
+    webdriver.ActionChains(driver).move_to_element(accept).click().perform()
 
     generate = driver.find_element(By.CSS_SELECTOR, 'button[type="button"]')
     webdriver.ActionChains(driver).move_to_element(generate)
@@ -48,7 +48,7 @@ def collect_detailed_data_from_online_generator():
 
     with open('detailedpesels.csv', 'a') as file:
         fake = Faker()
-        for _ in range(1):  # This FOR was previously used to collect larger amount of data for a fucked-up ML project
+        for _ in range(1):
             for i in range(5):
 
                 date = fake.date_between(start_date=datetime(centuries[i][1][0], centuries[i][1][1],
@@ -56,7 +56,7 @@ def collect_detailed_data_from_online_generator():
                                          end_date=datetime(centuries[i][2][0], centuries[i][2][1],
                                                            centuries[i][2][2]))
                 webdriver.ActionChains(driver).move_to_element(female).click().perform()
-                gender = '0'  # added
+                gender = '0'
                 dateinput.send_keys(f'{date.day}.{date.month}.{date.year}')
                 webdriver.ActionChains(driver).move_to_element(generate).click().perform()
                 time.sleep(1.5)
@@ -73,7 +73,7 @@ def collect_detailed_data_from_online_generator():
                 writepeseltocsv(gender)
 
                 webdriver.ActionChains(driver).move_to_element(male).click().perform()
-                gender = '1'  # added
+                gender = '1'
                 dateinput.send_keys(f'{date.day}.{date.month}.{date.year}')
                 webdriver.ActionChains(driver).move_to_element(generate).click().perform()
                 time.sleep(1.5)

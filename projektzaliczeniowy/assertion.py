@@ -39,9 +39,11 @@ def arrange_assert():
                                              pesel=peseltovalidate,
                                              assertion_result='True')
         write_to_db.save()
+
         response = requests.get('http://127.0.0.1:8000/Assertions')
         json_response = json.loads(response.text)
-        print("No assertion error: 'True' below means that project SUCCEEDED.")
-        print(json_response["Asserted PESELs"][len(json_response["Asserted PESELs"]) - 1])
+        print("No assertion error: \"'assertion_result': 'True'\" below means that project SUCCEEDED.")
+        print(json_response[-1])
+        # print(json_response["Asserted PESELs"][len(json_response["Asserted PESELs"]) - 1])
     finally:
         print("Will now start quitting....")

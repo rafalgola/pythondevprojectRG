@@ -1,6 +1,6 @@
-# from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Asserted_Pesels
+from django.forms.models import model_to_dict
 
 # Create your views here.
 invalidmonths = {'13', '14', '15', '16', '17', '18', '19', '20',
@@ -37,7 +37,15 @@ def validate_pesel(request):
                                                                                    'long.'}, status=400)
 
 
+# def list_asserted_pesels(request):
+#     assertions = Asserted_Pesels.objects.all()
+#     data = list(assertions.values('stamp', 'pesel', 'assertion_result'))
+#     return JsonResponse({'Asserted PESELs': data})
+
+
 def list_asserted_pesels(request):
     assertions = Asserted_Pesels.objects.all()
-    data = list(assertions.values('stamp', 'pesel', 'assertion_result'))
-    return JsonResponse({'Asserted PESELs': data})
+    data_list = [model_to_dict(assertion) for assertion in assertions]
+    return JsonResponse(data_list, safe=False)
+
+
