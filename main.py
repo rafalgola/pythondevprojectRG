@@ -45,7 +45,7 @@ def main():
         activate_virtual_env_and_perform_logic()
     else:
         print("Your choose not to proceed...")
-    input("Press enter to quit...")
+    # input("Press enter to quit...")
 
 
 if __name__ == '__main__':
